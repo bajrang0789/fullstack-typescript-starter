@@ -1,0 +1,11 @@
+{
+  "name": "professional-project",
+  "version": "1.0.0",
+  "description": "Full-stack application with authentication",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsx watch src/index.ts",
+    "test": "jest"
+  }
+}

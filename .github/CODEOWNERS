@@ -1,0 +1,22 @@
+# Code Owners
+# These users will be automatically requested for review when someone opens a pull request
+
+# Global owners
+* @bajrang0789
+
+# Backend code
+/src/auth/ @bajrang0789
+/src/db/ @bajrang0789
+/src/routes/ @bajrang0789
+
+# Frontend code
+/frontend/ @bajrang0789
+
+# Infrastructure
+/k8s/ @bajrang0789
+/Dockerfile @bajrang0789
+/.github/ @bajrang0789
+
+# Documentation
+/docs/ @bajrang0789
+*.md @bajrang0789

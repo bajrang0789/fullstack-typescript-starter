@@ -1,120 +1,198 @@
-# Git History Demo
+# Professional Full-Stack Project
 
-A repository with rich commit history.
+[![CI](https://github.com/bajrang0789/fullstack-typescript-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/bajrang0789/fullstack-typescript-starter/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
+[![Node.js](https://img.shields.io/badge/Node.js-18.19-green.svg)](https://nodejs.org/)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
 
-## Update: Initial project setup
-Date: 2024-01-15
+A production-ready full-stack application built with TypeScript, featuring robust authentication, RESTful API, PostgreSQL database, React frontend, and comprehensive monitoring.
 
-## Update: Add core functionality
-Date: 2024-02-10
+## 🚀 Features
 
-## Update: Implement user authentication
-Date: 2024-02-28
+- **Authentication System**: JWT-based auth with refresh token rotation and bcrypt password hashing
+- **RESTful API**: Express.js with request validation, pagination, and versioning
+- **Database**: PostgreSQL with Prisma ORM, migrations, and repository pattern
+- **Frontend**: React 18 with TypeScript, Tailwind CSS, and React Query
+- **Caching**: Redis integration for improved performance
+- **Monitoring**: Winston structured logging and Prometheus metrics
+- **Testing**: Jest with 85% code coverage
+- **CI/CD**: GitHub Actions with automated testing and deployment
+- **Containerization**: Docker multi-stage builds and Kubernetes manifests
+- **Security**: Rate limiting, input validation, SQL injection prevention
 
-## Update: Add database integration
-Date: 2024-03-15
+## 📋 Prerequisites
 
-## Update: Create API endpoints
-Date: 2024-04-05
+- Node.js 18.19 or higher
+- PostgreSQL 14+
+- Redis 7+ (optional, for caching)
+- Docker & Docker Compose (for containerized setup)
 
-## Update: Add frontend components
-Date: 2024-04-22
+## 🛠️ Installation
 
-## Update: Implement routing system
-Date: 2024-05-10
+```bash
+# Clone the repository
+git clone git@github.com:bajrang0789/fullstack-typescript-starter.git
+cd fullstack-typescript-starter
 
-## Update: Add error handling
-Date: 2024-05-28
+# Install dependencies
+npm ci
 
-## Update: Optimize performance
-Date: 2024-06-12
+# Set up environment variables
+cp .env.example .env
+# Edit .env with your configuration
 
-## Update: Add unit tests
-Date: 2024-06-30
+# Run database migrations
+npm run db:migrate
 
-## Update: Implement caching layer
-Date: 2024-07-18
+# Seed the database (optional)
+npm run db:seed
+```
 
-## Update: Add logging system
-Date: 2024-08-05
+## 🏃 Running the Application
 
-## Update: Refactor code structure
-Date: 2024-08-25
+### Development Mode
 
-## Update: Update dependencies
-Date: 2024-09-10
+```bash
+# Start the backend API
+npm run dev
 
-## Update: Add documentation
-Date: 2024-09-28
+# Start the frontend (in another terminal)
+cd frontend
+npm run dev
+```
 
-## Update: Implement security features
-Date: 2024-10-15
+### Production Build
 
-## Update: Add CI/CD pipeline
-Date: 2024-11-02
+```bash
+# Build the application
+npm run build
 
-## Update: Performance improvements
-Date: 2024-11-20
+# Start the production server
+npm start
+```
 
-## Update: Bug fixes and optimizations
-Date: 2024-12-05
+### Using Docker
 
-## Update: Year-end cleanup
-Date: 2024-12-28
+```bash
+# Build and start all services
+docker-compose up -d
 
-## Update: New year updates
-Date: 2025-01-10
+# View logs
+docker-compose logs -f
 
-## Update: Feature enhancements
-Date: 2025-01-28
+# Stop services
+docker-compose down
+```
 
-## Update: UI/UX improvements
-Date: 2025-02-15
+## 📚 Documentation
 
-## Update: Add mobile support
-Date: 2025-03-05
+- [API Documentation](docs/API.md) - Complete API reference
+- [Architecture Guide](docs/ARCHITECTURE.md) - System design and patterns
+- [Deployment Guide](docs/DEPLOYMENT.md) - Production deployment instructions
+- [Contributing Guidelines](CONTRIBUTING.md) - How to contribute
+- [Changelog](CHANGELOG.md) - Version history and changes
 
-## Update: Database migrations
-Date: 2025-03-25
+## 🧪 Testing
 
-## Update: API versioning
-Date: 2025-04-10
+```bash
+# Run all tests
+npm test
 
-## Update: Add analytics
-Date: 2025-04-30
+# Run tests in watch mode
+npm run test:watch
 
-## Update: Security patches
-Date: 2025-05-18
+# Generate coverage report
+npm run test:coverage
+```
 
-## Update: Code review updates
-Date: 2025-06-05
+## 📦 Project Structure
 
-## Update: Add monitoring
-Date: 2025-06-25
+```
+.
+├── src/
+│   ├── auth/              # Authentication logic
+│   ├── db/                # Database client and repositories
+│   ├── routes/            # API endpoints
+│   ├── middleware/        # Express middleware
+│   ├── monitoring/        # Logging and metrics
+│   └── index.ts           # Application entry point
+├── frontend/              # React frontend application
+├── prisma/                # Database schema and migrations
+├── tests/                 # Test files
+├── k8s/                   # Kubernetes manifests
+├── docs/                  # Documentation
+└── .github/               # GitHub Actions workflows
+```
 
-## Update: Performance tuning
-Date: 2025-07-15
+## 🔐 Environment Variables
 
-## Update: Feature flags implementation
-Date: 2025-08-02
+```env
+# Database
+DATABASE_URL="postgresql://user:password@localhost:5432/mydb"
 
-## Update: Add A/B testing
-Date: 2025-08-22
+# Authentication
+JWT_SECRET="your-secret-key"
+JWT_EXPIRES_IN="1h"
 
-## Update: Refactor authentication
-Date: 2025-09-10
+# Redis (optional)
+REDIS_URL="redis://localhost:6379"
 
-## Update: Add webhooks
-Date: 2025-09-28
+# Server
+PORT=3000
+NODE_ENV=production
+```
 
-## Update: Implement rate limiting
-Date: 2025-10-15
+See `.env.example` for a complete list.
 
-## Update: Add GraphQL support
-Date: 2025-11-01
+## 🚢 Deployment
 
-## Update: Final optimizations
-Date: 2025-11-20
+### Docker Deployment
 
-## Update: Update README
-Date: 2025-11-29
+```bash
+# Build the image
+docker build -t professional-project:latest .
+
+# Run the container
+docker run -p 3000:3000 --env-file .env professional-project:latest
+```
+
+### Kubernetes Deployment
+
+```bash
+# Apply Kubernetes manifests
+kubectl apply -f k8s/
+
+# Check deployment status
+kubectl get pods
+kubectl logs -f deployment/professional-project
+```
+
+For detailed deployment instructions, see [Deployment Guide](docs/DEPLOYMENT.md).
+
+## 🤝 Contributing
+
+Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting a pull request.
+
+1. Fork the repository
+2. Create a feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'feat: add amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Built with ❤️ using modern web technologies
+- Thanks to all contributors who helped improve this project
+
+## 📞 Contact
+
+For questions or support, please open an issue on GitHub.
+
+---
+
+**Note**: This is a demonstration project showcasing professional development practices and clean architecture.

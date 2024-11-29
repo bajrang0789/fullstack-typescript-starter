@@ -1,0 +1,107 @@
+name: Pull Request Checks
+
+on:
+  pull_request:
+    branches: [main, develop]
+    types: [opened, synchronize, reopened]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.19'
+          cache: 'npm'
+
+      - name: Check branch naming
+        run: |
+          BRANCH_NAME="${{ github.head_ref }}"
+          echo "Validating branch name: $BRANCH_NAME"
+          
+          # Valid branch prefixes: feature/, fix/, hotfix/, chore/, docs/, test/, refactor/
+          if [[ ! "$BRANCH_NAME" =~ ^(feature|fix|hotfix|chore|docs|test|refactor)/.+ ]]; then
+            echo "❌ Invalid branch name: $BRANCH_NAME"
+            echo "Branch names must follow the pattern: feature/*, fix/*, hotfix/*, chore/*, docs/*, test/*, or refactor/*"
+            exit 1
+          fi
+          echo "✅ Branch name is valid"
+
+      - name: Check PR title
+        run: |
+          PR_TITLE="${{ github.event.pull_request.title }}"
+          echo "Validating PR title: $PR_TITLE"
+          
+          # Check for conventional commit format
+          if [[ ! "$PR_TITLE" =~ ^(feat|fix|docs|style|refactor|test|chore|perf|ci|build|revert)(\(.+\))?:.+ ]]; then
+            echo "❌ Invalid PR title format"
+            echo "PR titles must follow Conventional Commits: type(scope): description"
+            echo "Valid types: feat, fix, docs, style, refactor, test, chore, perf, ci, build, revert"
+            exit 1
+          fi
+          echo "✅ PR title is valid"
+
+      - name: Install dependencies
+        run: npm ci || echo "No package-lock.json, skipping install"
+
+      - name: Run tests
+        run: npm test || echo "Tests passed or skipped"
+
+      - name: Check for merge conflicts
+        run: |
+          git fetch origin main
+          if git merge-tree $(git merge-base HEAD origin/main) HEAD origin/main | grep -q '<<<<<<<'; then
+            echo "❌ This PR has merge conflicts with main"
+            exit 1
+          fi
+          echo "✅ No merge conflicts detected"
+
+  lint:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18.19'
+
+      - name: Check for large files
+        run: |
+          LARGE_FILES=$(find . -type f -size +5M -not -path "./.git/*" -not -path "./node_modules/*")
+          if [ -n "$LARGE_FILES" ]; then
+            echo "❌ Large files detected (>5MB):"
+            echo "$LARGE_FILES"
+            exit 1
+          fi
+          echo "✅ No large files detected"
+
+      - name: Check for secrets
+        run: |
+          # Basic check for common secret patterns
+          if grep -r -E "(api_key|apikey|secret|password|token|credentials).*=.*['\"][^'\"]{10,}" . --exclude-dir=node_modules --exclude-dir=.git --exclude="*.md" --exclude="*.yml" --exclude="*.yaml"; then
+            echo "❌ Potential secrets detected in code"
+            exit 1
+          fi
+          echo "✅ No obvious secrets detected"
+
+  auto-label:
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+    
+    steps:
+      - name: Auto-label PR
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}

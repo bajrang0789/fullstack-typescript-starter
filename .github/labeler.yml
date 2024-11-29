@@ -1,0 +1,35 @@
+documentation:
+  - '**/*.md'
+  - 'docs/**/*'
+
+dependencies:
+  - 'package.json'
+  - 'package-lock.json'
+
+ci:
+  - '.github/**/*'
+
+frontend:
+  - 'frontend/**/*'
+  - 'src/frontend/**/*'
+
+backend:
+  - 'src/**/*'
+  - '!src/frontend/**/*'
+
+tests:
+  - 'tests/**/*'
+  - '**/*.test.ts'
+  - '**/*.spec.ts'
+
+database:
+  - 'prisma/**/*'
+  - '**/migrations/**/*'
+
+docker:
+  - 'Dockerfile'
+  - 'docker-compose.yml'
+  - '.dockerignore'
+
+kubernetes:
+  - 'k8s/**/*'

@@ -1,5 +1,5 @@
 // JWT token generation and validation
-import jwt, { JwtPayload, SignOptions } from 'jsonwebtoken';
+import jwt, { JwtPayload, SignOptions, type StringValue } from 'jsonwebtoken';
 import { logger } from '../monitoring/logger';
 
 export interface TokenPayload {
@@ -19,7 +19,7 @@ const getJwtSecret = (): string => {
   return secret;
 };
 
-export const generateToken = (payload: TokenPayload, expiresIn: string = '1d'): string => {
+export const generateToken = (payload: TokenPayload, expiresIn: StringValue | number = '1d'): string => {
   const options: SignOptions = { expiresIn };
   return jwt.sign(payload, getJwtSecret(), options);
 };

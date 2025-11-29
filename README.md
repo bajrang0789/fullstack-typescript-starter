@@ -248,9 +248,10 @@ If you find this project helpful, please consider giving it a star on GitHub! It
 
 ## 📈 Project Stats
 
-[![Commits](https://img.shields.io/github/commit-activity/y/bajrang0789/fullstack-typescript-starter?label=Commits)](https://github.com/bajrang0789/fullstack-typescript-starter/commits)
-[![Releases](https://img.shields.io/github/v/release/bajrang0789/fullstack-typescript-starter?label=Latest%20Release)](https://github.com/bajrang0789/fullstack-typescript-starter/releases)
-[![Last Commit](https://img.shields.io/github/last-commit/bajrang0789/fullstack-typescript-starter?label=Last%20Commit)](https://github.com/bajrang0789/fullstack-typescript-starter/commits)
+- **Total Commits**: 25+
+- **Version Tags**: 8 releases
+- **Development Period**: 10+ months
+- **Last Updated**: November 2024
 
 ## 🔗 Links
 

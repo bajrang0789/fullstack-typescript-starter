@@ -54,6 +54,7 @@ services:
       PORT: 3000
     volumes:
       - .:/app
+      # Mount an anonymous volume to prevent host node_modules from overwriting container node_modules.
       - /app/node_modules
     depends_on:
       postgres:

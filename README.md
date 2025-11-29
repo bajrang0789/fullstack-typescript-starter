@@ -5,6 +5,10 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue.svg)](https://www.typescriptlang.org/)
 [![Node.js](https://img.shields.io/badge/Node.js-18.19-green.svg)](https://nodejs.org/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/code%20of-conduct-ff69b4.svg)](CODE_OF_CONDUCT.md)
+[![GitHub issues](https://img.shields.io/github/issues/bajrang0789/fullstack-typescript-starter)](https://github.com/bajrang0789/fullstack-typescript-starter/issues)
+[![GitHub stars](https://img.shields.io/github/stars/bajrang0789/fullstack-typescript-starter)](https://github.com/bajrang0789/fullstack-typescript-starter/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/bajrang0789/fullstack-typescript-starter)](https://github.com/bajrang0789/fullstack-typescript-starter/network)
 
 A production-ready full-stack application built with TypeScript, featuring robust authentication, RESTful API, PostgreSQL database, React frontend, and comprehensive monitoring.
 
@@ -85,6 +89,18 @@ docker-compose logs -f
 docker-compose down
 ```
 
+**Services included:**
+- PostgreSQL (port 5432)
+- Redis (port 6379)
+- Application (port 3000)
+- pgAdmin (port 8080) - Optional with `--profile tools`
+- Redis Commander (port 8081) - Optional with `--profile tools`
+
+```bash
+# Start with management tools
+docker-compose --profile tools up -d
+```
+
 ## 📚 Documentation
 
 - [API Documentation](docs/API.md) - Complete API reference
@@ -92,6 +108,20 @@ docker-compose down
 - [Deployment Guide](docs/DEPLOYMENT.md) - Production deployment instructions
 - [Contributing Guidelines](CONTRIBUTING.md) - How to contribute
 - [Changelog](CHANGELOG.md) - Version history and changes
+- [Workflow Guide](WORKFLOW.md) - Development workflow
+- [Code of Conduct](CODE_OF_CONDUCT.md) - Community guidelines
+- [Support](SUPPORT.md) - Getting help
+
+## 🛠️ VS Code Setup
+
+This project includes VS Code configuration for optimal development experience:
+
+- **Recommended Extensions**: Auto-prompt for required extensions
+- **Debugger Configuration**: Launch configurations for debugging
+- **Settings**: Auto-format on save, ESLint integration, Tailwind IntelliSense
+- **Tasks**: Pre-configured build and test tasks
+
+Open the project in VS Code and install recommended extensions when prompted!
 
 ## 🧪 Testing
 
@@ -180,6 +210,21 @@ Contributions are welcome! Please read our [Contributing Guidelines](CONTRIBUTIN
 4. Push to the branch (`git push origin feature/amazing-feature`)
 5. Open a Pull Request
 
+See [WORKFLOW.md](WORKFLOW.md) for detailed development workflow.
+
+## 🛡️ Code of Conduct
+
+This project follows the [Contributor Covenant Code of Conduct](CODE_OF_CONDUCT.md). By participating, you agree to uphold this code.
+
+## 💬 Support
+
+Need help? Check out our [Support Guide](SUPPORT.md) for:
+- Documentation links
+- How to report bugs
+- Feature requests
+- Security issue reporting
+- Community discussions
+
 ## 📄 License
 
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
@@ -196,3 +241,21 @@ For questions or support, please open an issue on GitHub.
 ---
 
 **Note**: This is a production-ready starter template for building full-stack TypeScript applications with best practices and clean architecture.
+
+## ⭐ Show Your Support
+
+If you find this project helpful, please consider giving it a star on GitHub! It helps others discover the project.
+
+## 📈 Project Stats
+
+- **Total Commits**: 25+
+- **Version Tags**: 8 releases
+- **Development Period**: 10+ months
+- **Last Updated**: November 2024
+
+## 🔗 Links
+
+- [Repository](https://github.com/bajrang0789/fullstack-typescript-starter)
+- [Issues](https://github.com/bajrang0789/fullstack-typescript-starter/issues)
+- [Pull Requests](https://github.com/bajrang0789/fullstack-typescript-starter/pulls)
+- [Discussions](https://github.com/bajrang0789/fullstack-typescript-starter/discussions)

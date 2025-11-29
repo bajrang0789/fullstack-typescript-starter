@@ -6,21 +6,15 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [1.0.1] - 2024-11-24
-
 ### Fixed
+# Changelog
 - Critical security patch for SQL injection vulnerability in search endpoints
 - Memory leak in WebSocket connection handler
 - Optimized database connection pooling
 
 ### Added
-- Redis caching layer for improved performance
-- Database query optimization with proper indexing
-
 ## [1.0.0] - 2024-11-10
 
-### Added
-- Production Docker images with multi-stage builds
-- Kubernetes deployment manifests
 - Nginx reverse proxy configuration
 - Comprehensive deployment documentation
 - Blue-green deployment strategy

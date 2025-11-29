@@ -19,16 +19,16 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.19'
-          cache: 'npm'
+
       - name: Check branch naming
         run: |
           BRANCH_NAME="${{ github.head_ref }}"
           echo "Validating branch name: $BRANCH_NAME"
           
-          # Valid branch prefixes: feature/, fix/, hotfix/, chore/, docs/, test/, refactor/
-          if [[ ! "$BRANCH_NAME" =~ ^(feature|fix|hotfix|chore|docs|test|refactor)/.+ ]]; then
+          # Valid branch prefixes: feature/, fix/, hotfix/, chore/, docs/, test/, refactor/, copilot/, dependabot/
+          if [[ ! "$BRANCH_NAME" =~ ^(feature|fix|hotfix|chore|docs|test|refactor|copilot|dependabot)/.+ ]]; then
             echo "❌ Invalid branch name: $BRANCH_NAME"
-            echo "Branch names must follow the pattern: feature/*, fix/*, hotfix/*, chore/*, docs/*, test/*, or refactor/*"
+            echo "Branch names must follow the pattern: feature/*, fix/*, hotfix/*, chore/*, docs/*, test/*, refactor/*, copilot/*, or dependabot/*"
             exit 1
           fi
           echo "✅ Branch name is valid"

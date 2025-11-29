@@ -6,15 +6,15 @@ services:
     container_name: fullstack-postgres
     restart: unless-stopped
     environment:
-      POSTGRES_USER: devuser
-      POSTGRES_PASSWORD: devpassword
-      POSTGRES_DB: fullstack_dev
+      POSTGRES_USER: ${POSTGRES_USER:-devuser}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-devpassword}
+      POSTGRES_DB: ${POSTGRES_DB:-fullstack_dev}
     ports:
       - '5432:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ['CMD-SHELL', 'pg_isready -U devuser']
+      test: ['CMD-SHELL', 'pg_isready -U $${POSTGRES_USER:-devuser}']
       interval: 10s
       timeout: 5s
       retries: 5
@@ -46,7 +46,7 @@ services:
       - '3000:3000'
     environment:
       NODE_ENV: development
-      DATABASE_URL: postgresql://devuser:devpassword@postgres:5432/fullstack_dev
+      DATABASE_URL: postgresql://${POSTGRES_USER:-devuser}:${POSTGRES_PASSWORD:-devpassword}@postgres:5432/${POSTGRES_DB:-fullstack_dev}
       REDIS_URL: redis://redis:6379
       # WARNING: The default JWT_SECRET is for development only. Set JWT_SECRET in your environment or .env file for production!
       JWT_SECRET: ${JWT_SECRET:-dev-secret-change-in-production}

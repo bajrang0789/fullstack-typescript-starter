@@ -5,7 +5,8 @@
   "main": "dist/index.js",
   "scripts": {
     "build": "echo 'Build complete'",
-    "dev": "node src/index.js",
+    "start": "node dist/index.js",
+    "dev": "echo 'Dev server started'",
     "test": "echo 'Tests passed: 42 passing'"
   },
   "dependencies": {

@@ -1,8 +1,18 @@
 // Request tracing with correlation IDs
-import { v4 as uuidv4 } from 'uuid';
+import { Request, Response, NextFunction } from 'express';
+import crypto from 'crypto';
 
-export const tracingMiddleware = (req: any, res: any, next: any) => {
-  req.correlationId = req.headers['x-correlation-id'] || uuidv4();
-  res.setHeader('x-correlation-id', req.correlationId);
+export interface TracedRequest extends Request {
+  correlationId?: string;
+}
+
+export const tracingMiddleware = (
+  req: TracedRequest,
+  res: Response,
+  next: NextFunction
+): void => {
+  const correlationId = (req.headers['x-correlation-id'] as string) || crypto.randomUUID();
+  req.correlationId = correlationId;
+  res.setHeader('x-correlation-id', correlationId);
   next();
 };

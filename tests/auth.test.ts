@@ -10,6 +10,10 @@ const TEST_FIXTURES = {
   anotherValidInput: 'another-test-input-value',
   shortInput: 'short',
   jwtSecret: 'x'.repeat(32) + '-test-only',
+  // Test user payloads for JWT tests
+  user1: { id: 'test-id-aaa', email: 'aaa@example.test' },
+  user2: { id: 'test-id-bbb', email: 'bbb@example.test' },
+  mainUser: { id: 'test-user-id-123', email: 'main@example.test' },
 } as const;
 
 // Set up test environment
@@ -75,7 +79,7 @@ describe('Password Utilities', () => {
 });
 
 describe('JWT Utilities', () => {
-  const testPayload = { id: 'test-user-id-123', email: 'test@example.com' };
+  const testPayload = TEST_FIXTURES.mainUser;
 
   describe('generateToken', () => {
     it('should generate a valid JWT token', () => {
@@ -87,8 +91,8 @@ describe('JWT Utilities', () => {
     });
 
     it('should generate different tokens for different payloads', () => {
-      const token1 = generateToken({ id: 'id-1', email: 'a@test.com' });
-      const token2 = generateToken({ id: 'id-2', email: 'b@test.com' });
+      const token1 = generateToken(TEST_FIXTURES.user1);
+      const token2 = generateToken(TEST_FIXTURES.user2);
       
       expect(token1).not.toBe(token2);
     });

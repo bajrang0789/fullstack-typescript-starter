@@ -16,4 +16,4 @@ COPY package*.json ./
 ARG NODE_ENV=production
 ENV NODE_ENV=${NODE_ENV}
 EXPOSE 3000
-CMD ["node", "dist/server.js"]
+CMD ["sh", "-c", "npx prisma migrate deploy && node dist/server.js"]

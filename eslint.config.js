@@ -18,9 +18,11 @@ export default [
       '@typescript-eslint': tseslint
     },
     rules: {
-      'no-console': 'off',
+      ...tseslint.configs.recommended.rules,
+      'no-console': 'warn',
       'no-undef': 'off',
-      'no-unused-vars': ['warn', { argsIgnorePattern: '^_' }]
+      'no-unused-vars': 'off',
+      '@typescript-eslint/no-unused-vars': ['warn', { argsIgnorePattern: '^_' }]
     }
   }
 ];

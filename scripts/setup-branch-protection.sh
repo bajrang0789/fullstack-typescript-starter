@@ -38,7 +38,11 @@ gh api \
 {
   "required_status_checks": {
     "strict": true,
-    "contexts": ["validate", "lint", "build"]
+    "checks": [
+      {"context": "validate"},
+      {"context": "lint"},
+      {"context": "build"}
+    ]
   },
   "enforce_admins": true,
   "required_pull_request_reviews": {

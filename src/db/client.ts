@@ -1,6 +1,5 @@
 // Database client with connection pooling
 import { PrismaClient } from '@prisma/client';
-import { logger } from '../monitoring/logger';
 
 // Singleton pattern for PrismaClient
 const globalForPrisma = globalThis as unknown as {
@@ -17,10 +16,7 @@ if (process.env.NODE_ENV !== 'production') {
   globalForPrisma.prisma = prisma;
 }
 
-// Graceful shutdown
-process.on('beforeExit', async () => {
-  logger.info('Disconnecting from database...');
-  await prisma.$disconnect();
-});
+// Note: Graceful shutdown is handled in src/index.ts via SIGTERM/SIGINT handlers
+// to avoid duplicate disconnect calls
 
 export default prisma;

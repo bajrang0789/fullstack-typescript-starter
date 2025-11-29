@@ -2,6 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { logger } from '../monitoring/logger';
 import { ZodError } from 'zod';
+import { Prisma } from '@prisma/client';
 
 export interface AppError extends Error {
   statusCode?: number;
@@ -31,6 +32,34 @@ export const errorHandler = (
       }))
     });
     return;
+  }
+
+  // Handle Prisma errors
+  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+    switch (err.code) {
+      case 'P2002': {
+        // Unique constraint violation
+        const target = (err.meta?.target as string[])?.join(', ') || 'field';
+        res.status(409).json({
+          error: `A record with this ${target} already exists`
+        });
+        return;
+      }
+      case 'P2025':
+        // Record not found
+        res.status(404).json({
+          error: 'Record not found'
+        });
+        return;
+      case 'P2003':
+        // Foreign key constraint violation
+        res.status(400).json({
+          error: 'Related record not found'
+        });
+        return;
+      default:
+        logger.error('Unhandled Prisma error', { code: err.code, meta: err.meta });
+    }
   }
 
   // Handle operational errors

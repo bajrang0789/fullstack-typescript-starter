@@ -34,6 +34,13 @@ export class UserRepository {
     });
   }
 
+  /**
+   * Creates a new user with the given data.
+   * @param data - User creation input
+   * @param data.email - User's email address
+   * @param data.password - Plaintext password (will be hashed before storage)
+   * @returns The created user without the password field
+   */
   async create(data: CreateUserInput): Promise<SafeUser> {
     const hashedPassword = await hashPassword(data.password);
     return prisma.user.create({
@@ -50,6 +57,14 @@ export class UserRepository {
     });
   }
 
+  /**
+   * Updates an existing user.
+   * @param id - User ID
+   * @param data - Fields to update
+   * @param data.email - New email (optional)
+   * @param data.password - New plaintext password (optional, will be hashed before storage)
+   * @returns The updated user without the password field
+   */
   async update(id: string, data: UpdateUserInput): Promise<SafeUser> {
     const updateData: UpdateUserInput = { ...data };
     

@@ -7,22 +7,31 @@ import { errorHandler } from './middleware/error';
 import { healthRouter } from './routes/health';
 import { authRouter } from './routes/auth';
 import { userRouter } from './routes/api/v1/users';
-import { logger } from './monitoring/logger';
+import { httpLogStream, logger } from './monitoring/logger';
 
 const app: Application = express();
 
 // Security middleware
 app.use(helmet());
-app.use(cors());
+
+// CORS configuration - restrict origins in production
+const corsOptions = {
+  origin: process.env.CORS_ORIGIN 
+    ? process.env.CORS_ORIGIN.split(',').map(o => o.trim())
+    : process.env.NODE_ENV === 'production' 
+      ? false // Block all in production if not configured
+      : true,  // Allow all in development
+  credentials: true,
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
 
 // Body parsing middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Request logging
-app.use(morgan('combined', {
-  stream: { write: (message: string) => logger.info(message.trim()) }
-}));
+// Request logging using centralized httpLogStream
+app.use(morgan('combined', { stream: httpLogStream }));
 
 // Health check route
 app.use('/health', healthRouter);

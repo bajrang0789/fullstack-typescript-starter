@@ -1,20 +1,25 @@
 // User CRUD endpoints
-import { Router, Response, NextFunction } from 'express';
-import { z } from 'zod';
+import { Router, Response, NextFunction, RequestHandler } from 'express';
 import { authMiddleware, AuthenticatedRequest } from '../../../middleware/auth';
 import { prisma } from '../../../db/client';
 import { OperationalError } from '../../../middleware/error';
 import { logger } from '../../../monitoring/logger';
+import { updateUserSchema, userIdSchema } from '../../../schemas/user.schema';
 
 export const userRouter = Router();
 
 // Apply auth middleware to all routes
 userRouter.use(authMiddleware);
 
-// Validation schema for user updates
-const updateUserSchema = z.object({
-  email: z.string().email('Invalid email format').optional()
-});
+// Validation middleware for UUID params
+const validateUserId: RequestHandler = (req, _res, next) => {
+  try {
+    userIdSchema.parse({ id: req.params.id });
+    next();
+  } catch (error) {
+    next(error);
+  }
+};
 
 // Get current user profile
 userRouter.get('/me', async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
@@ -39,7 +44,7 @@ userRouter.get('/me', async (req: AuthenticatedRequest, res: Response, next: Nex
 });
 
 // Get user by ID (admin only - to be expanded)
-userRouter.get('/:id', async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+userRouter.get('/:id', validateUserId, async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
 
@@ -63,8 +68,9 @@ userRouter.get('/:id', async (req: AuthenticatedRequest, res: Response, next: Ne
   }
 });
 
-// Update user
-userRouter.patch('/:id', async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+// Update user - uses atomic update to avoid race conditions
+// Prisma P2002 error is handled by global error middleware for duplicate emails
+userRouter.patch('/:id', validateUserId, async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
 
@@ -75,14 +81,7 @@ userRouter.patch('/:id', async (req: AuthenticatedRequest, res: Response, next: 
 
     const data = updateUserSchema.parse(req.body);
 
-    // Check if email is already taken
-    if (data.email) {
-      const existingUser = await prisma.user.findUnique({ where: { email: data.email } });
-      if (existingUser && existingUser.id !== id) {
-        throw new OperationalError('Email already in use', 409);
-      }
-    }
-
+    // Atomic update - let Prisma handle unique constraint via error middleware
     const user = await prisma.user.update({
       where: { id },
       data,
@@ -98,7 +97,7 @@ userRouter.patch('/:id', async (req: AuthenticatedRequest, res: Response, next: 
 });
 
 // Delete user
-userRouter.delete('/:id', async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+userRouter.delete('/:id', validateUserId, async (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
 

@@ -14,6 +14,10 @@ const getJwtSecret = (): string => {
     throw new Error('JWT_SECRET is required but not configured');
   }
   if (secret.length < 32) {
+    if (process.env.NODE_ENV === 'production') {
+      logger.error('JWT_SECRET must be at least 32 characters in production');
+      throw new Error('JWT_SECRET must be at least 32 characters for security');
+    }
     logger.warn('JWT_SECRET should be at least 32 characters for security');
   }
   return secret;

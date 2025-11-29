@@ -1,7 +1,7 @@
 {
-  "name": "professional-project",
+  "name": "fullstack-typescript-starter",
   "version": "1.0.1",
-  "description": "Full-stack application with authentication",
+  "description": "Production-ready full-stack TypeScript starter with authentication, REST API, and monitoring",
   "main": "dist/index.js",
   "scripts": {
     "build": "echo 'Build complete'",

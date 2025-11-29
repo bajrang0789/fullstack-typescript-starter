@@ -1,4 +1,4 @@
-# Professional Full-Stack Project
+# Full-Stack TypeScript Starter
 
 [![CI](https://github.com/bajrang0789/fullstack-typescript-starter/actions/workflows/ci.yml/badge.svg)](https://github.com/bajrang0789/fullstack-typescript-starter/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
@@ -195,4 +195,4 @@ For questions or support, please open an issue on GitHub.
 
 ---
 
-**Note**: This is a demonstration project showcasing professional development practices and clean architecture.
+**Note**: This is a production-ready starter template for building full-stack TypeScript applications with best practices and clean architecture.

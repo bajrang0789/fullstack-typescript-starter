@@ -17,3 +17,15 @@ jobs:
       - run: npm run lint
       - run: npm test
       - run: npm run build
+      # Lightweight smoke test in production mode
+      - name: Start app (prod) for smoke test
+        run: |
+          NODE_ENV=production node dist/server.js &
+          echo $! > app.pid
+          sleep 2
+      - name: Smoke test /health
+        run: |
+          curl -sSf http://localhost:3000/health | jq '.'
+      - name: Stop app
+        run: |
+          kill $(cat app.pid) || true

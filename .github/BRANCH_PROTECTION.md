@@ -2,6 +2,12 @@
 
 This document describes the branch protection rules that should be configured for this repository.
 
+> **⚠️ Important**: Branch protection rules require either:
+> - A public repository, OR
+> - GitHub Pro subscription for private repositories
+>
+> If you're using a free private repository, you can still use the PR workflow and automated checks, but branch protection must be enforced through team discipline.
+
 ## Main Branch Protection
 
 The `main` branch should have the following protection rules enabled:

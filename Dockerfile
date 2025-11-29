@@ -10,4 +10,5 @@ WORKDIR /app
 COPY --from=builder /app/dist ./dist
 COPY --from=builder /app/node_modules ./node_modules
 COPY package*.json ./
-CMD ["node", "dist/index.js"]
+ENV NODE_ENV=production
+CMD ["node", "dist/server.js"]

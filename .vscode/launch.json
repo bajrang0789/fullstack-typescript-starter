@@ -17,7 +17,7 @@
       "request": "launch",
       "name": "Jest Current File",
       "program": "${workspaceFolder}/node_modules/.bin/jest",
-      "args": ["${fileBasenameNoExtension}", "--runInBand", "--no-cache"],
+      "args": ["${relativeFile}", "--runInBand", "--no-cache"],
       "console": "integratedTerminal",
       "internalConsoleOptions": "neverOpen",
       "windows": {

@@ -68,8 +68,8 @@ services:
     restart: unless-stopped
     environment:
       PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL:-admin@admin.com}
-      # WARNING: You must set PGADMIN_PASSWORD via environment variable or .env file. No default password is provided for security reasons!
-      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+      # WARNING: Default password is for local development only. Set PGADMIN_PASSWORD for shared environments!
+      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD:-admin}
       PGADMIN_LISTEN_PORT: 80
     ports:
       - '8080:80'

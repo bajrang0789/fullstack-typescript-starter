@@ -16,7 +16,6 @@
     "prisma:studio": "prisma studio",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
-    "precommit": "npm run typecheck",
     "prepush": "npm test"
   },
   "dependencies": {

@@ -39,7 +39,7 @@ export const errorHandler = (
     switch (err.code) {
       case 'P2002': {
         // Unique constraint violation
-        const target = (err.meta?.target as string[] | undefined)?.join(', ') || 'field';
+        const target = (err.meta?.target as string[])?.join(', ') || 'field';
         res.status(409).json({
           error: `A record with this ${target} already exists`
         });

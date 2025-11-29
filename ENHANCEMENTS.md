@@ -280,8 +280,8 @@
 4. ✅ Add CodeQL analysis
 
 ### Phase 2: Developer Experience (Week 2)
-5. ✅ Add Docker Compose for development
-6. ✅ Add VS Code configuration
+5. [ ] Add Docker Compose for development
+6. [ ] Add VS Code configuration
 7. ✅ Add GitHub Codespaces support
 8. ✅ Add API documentation generator
 

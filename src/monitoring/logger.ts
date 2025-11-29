@@ -35,6 +35,8 @@ export const logger = winston.createLogger({
       maxFiles: 5
     }),
   ],
+  // Silence logger in test environment
+  silent: process.env.NODE_ENV === 'test',
 });
 
 // Add console transport for non-production environments

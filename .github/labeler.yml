@@ -22,8 +22,9 @@ frontend:
 
 backend:
   - changed-files:
-    - any-glob-to-any-file: 'src/**/*'
-    - all-globs-to-all-files: '!src/frontend/**/*'
+    - any-glob-to-any-file:
+        - 'src/**/*'
+        - '!src/frontend/**/*'
 
 tests:
   - changed-files:

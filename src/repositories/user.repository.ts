@@ -33,9 +33,15 @@ export class UserRepository {
     });
   }
 
-  async findByEmail(email: string): Promise<Awaited<ReturnType<typeof prisma.user.findUnique>>> {
+  async findByEmail(email: string): Promise<SafeUser | null> {
     return prisma.user.findUnique({
-      where: { email }
+      where: { email },
+      select: {
+        id: true,
+        email: true,
+        createdAt: true,
+        updatedAt: true
+      }
     });
   }
 

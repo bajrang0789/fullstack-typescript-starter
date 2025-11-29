@@ -19,7 +19,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '18.19'
-          cache: 'npm'
+
       - name: Check branch naming
         run: |
           BRANCH_NAME="${{ github.head_ref }}"

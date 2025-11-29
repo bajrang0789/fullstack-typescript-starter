@@ -1,35 +1,51 @@
 documentation:
-  - '**/*.md'
-  - 'docs/**/*'
+  - changed-files:
+    - any-glob-to-any-file: '**/*.md'
+  - changed-files:
+    - any-glob-to-any-file: 'docs/**/*'
 
 dependencies:
-  - 'package.json'
-  - 'package-lock.json'
+  - changed-files:
+    - any-glob-to-any-file: 
+      - 'package.json'
+      - 'package-lock.json'
 
 ci:
-  - '.github/**/*'
+  - changed-files:
+    - any-glob-to-any-file: '.github/**/*'
 
 frontend:
-  - 'frontend/**/*'
-  - 'src/frontend/**/*'
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'frontend/**/*'
+      - 'src/frontend/**/*'
 
 backend:
-  - 'src/**/*'
-  - '!src/frontend/**/*'
+  - changed-files:
+    - any-glob-to-any-file:
+        - 'src/**/*'
+        - '!src/frontend/**/*'
 
 tests:
-  - 'tests/**/*'
-  - '**/*.test.ts'
-  - '**/*.spec.ts'
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'tests/**/*'
+      - '**/*.test.ts'
+      - '**/*.spec.ts'
 
 database:
-  - 'prisma/**/*'
-  - '**/migrations/**/*'
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'prisma/**/*'
+      - '**/migrations/**/*'
 
 docker:
-  - 'Dockerfile'
-  - 'docker-compose.yml'
-  - '.dockerignore'
+  - changed-files:
+    - any-glob-to-any-file:
+      - 'Dockerfile'
+      - 'docker-compose.yml'
+      - '.dockerignore'
 
 kubernetes:
-  - 'k8s/**/*'
+  - changed-files:
+    - any-glob-to-any-file: 'k8s/**/*'

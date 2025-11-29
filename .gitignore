@@ -6,5 +6,12 @@ build/
 *.log
 coverage/
 .DS_Store
-.vscode/
 .idea/
+
+# Allow VS Code workspace settings
+!.vscode/
+.vscode/*
+!.vscode/settings.json
+!.vscode/extensions.json
+!.vscode/launch.json
+!.vscode/tasks.json

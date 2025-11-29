@@ -41,7 +41,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-      target: development
     container_name: fullstack-app
     restart: unless-stopped
     ports:

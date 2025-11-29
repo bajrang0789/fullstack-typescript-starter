@@ -4,9 +4,18 @@ build/
 .env
 .env.local
 *.log
+logs/*.log
+!logs/.gitkeep
 coverage/
 .DS_Store
 .idea/
+
+# Prisma
+prisma/*.db
+prisma/*.db-journal
+
+# TypeScript
+*.tsbuildinfo
 
 # Allow VS Code workspace settings
 !.vscode/

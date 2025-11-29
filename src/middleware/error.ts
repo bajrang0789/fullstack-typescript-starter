@@ -2,7 +2,7 @@
 import { Request, Response, NextFunction } from 'express';
 import { logger } from '../monitoring/logger';
 import { ZodError } from 'zod';
-import { Prisma } from '@prisma/client';
+import { PrismaClientKnownRequestError } from '@prisma/client/runtime/library';
 
 export interface AppError extends Error {
   statusCode?: number;
@@ -35,11 +35,11 @@ export const errorHandler = (
   }
 
   // Handle Prisma errors
-  if (err instanceof Prisma.PrismaClientKnownRequestError) {
+  if (err instanceof PrismaClientKnownRequestError) {
     switch (err.code) {
       case 'P2002': {
         // Unique constraint violation
-        const target = (err.meta?.target as string[])?.join(', ') || 'field';
+        const target = (err.meta?.target as string[] | undefined)?.join(', ') || 'field';
         res.status(409).json({
           error: `A record with this ${target} already exists`
         });

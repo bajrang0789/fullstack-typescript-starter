@@ -1,6 +1,6 @@
 // User repository pattern
 import { prisma } from '../db/client';
-import { User } from '@prisma/client';
+// Avoid direct model types to ensure compatibility across Prisma versions
 import { hashPassword } from '../auth/password';
 
 export interface CreateUserInput {
@@ -13,7 +13,12 @@ export interface UpdateUserInput {
   password?: string;
 }
 
-export type SafeUser = Omit<User, 'password'>;
+export interface SafeUser {
+  id: string;
+  email: string;
+  createdAt: Date;
+  updatedAt: Date;
+}
 
 export class UserRepository {
   async findById(id: string): Promise<SafeUser | null> {
@@ -28,7 +33,7 @@ export class UserRepository {
     });
   }
 
-  async findByEmail(email: string): Promise<User | null> {
+  async findByEmail(email: string): Promise<Awaited<ReturnType<typeof prisma.user.findUnique>>> {
     return prisma.user.findUnique({
       where: { email }
     });
